@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AwesomeAnswersMay2019</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <!-- <a href="/">Home</a> -->
+        <%= link_to 'Home', root_path %>
+        <%#= link_to 'Home', root_url %>
+        |
+        <!-- <a href="/contacts/new">Contact Us</a> -->
+        <%# `link_to` is a method called view helper that comes with Rails and it generate <a> tag %>
+        <%= link_to 'Contact Us', contacts_new_path %>
+        |
+        <%= link_to 'New Question', new_question_path %>
+        |
+        <%= link_to 'All Questions', questions_path %>
+        |
+        <% if user_signed_in? %>
+          Hello <%= current_user.full_name %>
+          <%= link_to "Sign Out", session_path, method: :delete, data: {confirm: "Are you sure you want to sign out?"} %>
+        <% else %>
+          <%= link_to "Sign In", new_session_path %>
+          |
+          <%= link_to "Sign Up", new_user_path %>
+        <% end %>
+      </nav>
+    </header>
+    <main class="container-fluid">
+      <% flash.each do |type, message| %>
+        <div class="flash flash-<%= type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

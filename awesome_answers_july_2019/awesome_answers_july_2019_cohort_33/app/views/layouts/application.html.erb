@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AwesomeAnswersMay2019</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+  <%# these alert the user %>
+  <%= flash[:notice] || flash[:alert] %>
+
+
+    <!-- <a href="/">Home</a> -->
+    <%= link_to 'Home', root_path %>
+    <%#= link_to 'Home', root_url %>
+    |
+    <!-- <a href="/contacts/new">Contact Us</a> -->
+    <%# `link_to` is a method called view helper that comes with Rails and it generate <a> tag %>
+    <%= link_to 'Contact Us', contacts_new_path %>
+    |
+    <%= link_to 'New Question', new_question_path %>
+    |
+    <%= link_to 'All Questions', questions_path %>
+    <%= yield %>
+  </body>
+</html>

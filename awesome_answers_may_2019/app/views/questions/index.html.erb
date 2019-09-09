@@ -1,0 +1,9 @@
+<h1>All Question</h1>
+
+<% @questions.each do |question| %>
+  <div>
+    <h2><%= link_to question.title, question_path(question) %></h2>
+    <p><%= question.body %></p>
+    <hr>
+  </div>
+<% end %>

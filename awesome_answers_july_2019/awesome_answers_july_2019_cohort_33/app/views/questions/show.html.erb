@@ -1,0 +1,54 @@
+<h3>Show Page</h3>
+
+<%= form_with(model: [@question, @answer], local: true) do |f| %>
+<% if @answer.errors.any? %>
+  <ul>
+    <% @answer.errors.full_messages.each do |msg|%>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+
+<div class="form-group">
+  <%= f.text_area(
+  :body,
+  cols: 50,
+  rows: 5,
+  placeholder: "What are your thoughts?",
+  class: "form-control"
+  ) %>
+</div>
+<%= f.submit "Answer" %>
+<% end %>
+
+<hr />
+
+<ul class="answer-list">
+  <% @answers.each do |answer| %>
+    <li>
+      <p>
+        <%= answer.body %> <br />
+        <small>
+          <%= link_to(
+            "Delete",
+            question_answer_path(@question, answer),
+            method: :delete,
+            data: {
+              confirm: "Are you sure?"
+            }
+          ) %>
+        </small>
+        |
+        <small>
+          Answered <%= time_ago_in_words(answer.created_at) %> ago
+        </small>
+      </p>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Edit", edit_question_path(@question) %>
+<%= link_to "Delete", question_path(@question), method: :delete, data: {confirm: "Are you sure?"} %> 
